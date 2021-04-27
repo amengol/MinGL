@@ -12,7 +12,7 @@ Note: Since ray-tracing is very demanding, you better of writing an image to dis
 ![screenshot of a cube rendered with the sample program](/Example/MinGL_Example.PNG?raw=true)
 
 The above image was drawn using MinGL within a `DrawLine()` function based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
-Bresenham’s Line Algorithm used in the example code was based on https://github.com/ssloy/tinyrenderer/wiki
+Bresenham’s Line Algorithm used in the [example](Example/Main.cpp) code was based on https://github.com/ssloy/tinyrenderer/wiki
 
 Usage
 =====
