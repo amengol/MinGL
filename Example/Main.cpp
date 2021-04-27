@@ -1,6 +1,7 @@
 #include "MinGL.h"
 #include <iostream>
 
+// Based on https://github.com/ssloy/tinyrenderer/wiki, Lesson 1
 void drawLine(int x0, int y0, int x1, int y1, float r, float g, float b, const MinGL& minGL)
 {
 	bool steep = false;
