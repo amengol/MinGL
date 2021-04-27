@@ -1,0 +1,2 @@
+# MinGL
+Minimal Graphics Library
