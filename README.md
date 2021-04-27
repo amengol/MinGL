@@ -3,7 +3,7 @@ MinGL
 
 MinGL (Minimal Graphics Library) is a tiny graphics rendering class built on top of OpenGL. Its core function is `MinGL::putPixel()`, which receives the x/y coordinates and a color to draw a single pixel on the screen.  
 
-The idea is to serve as the most basic graphics API to test Computer Graphics concepts and algorithms such as line drawing, triangle rasterization, perspective projection etc. Normally those things are tested using still images rendered to disc, but with MinGL you can see the results immediately.
+The idea is to serve as the most basic graphics API to try computer graphics concepts and algorithms such as line drawing, triangle rasterization, perspective projection etc, without the need to deal with complicated API states and calls. Without a graphics API, such concepts are usually tested using still images rendered to disc, but with MinGL you can see the results immediately.
 
 Note: Since ray-tracing is very demanding, you better of writing an image to disc in such cases.
 
