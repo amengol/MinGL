@@ -3,6 +3,23 @@
 #include <GLFW/glfw3.h> // windows, contexts, input and events
 #include <iostream>
 
+const char* vertexShaderSource =
+"#version 330 core\n"
+"layout (location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
+
+const char* fragmentShaderSource =
+"#version 330 core\n"
+"out vec4 FragColor;\n"
+"uniform vec4 inColor;\n"
+"void main()\n"
+"{\n"
+"   FragColor = inColor;\n"
+"}\0";
+
 static void glfw_error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
@@ -47,6 +64,81 @@ bool MinGL::init(unsigned width, unsigned height, const char* title)
 		return false;
 	}
 
+	float vertices[] = {
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		-1.0f, -1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f
+	};
+
+	unsigned VAO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer
+	(
+		0,					// Location = 0
+		3,					// Size of vertex attribute
+		GL_FLOAT,			// Type of the data
+		GL_FALSE,			// Normalize data?
+		3 * sizeof(float),	// Stride
+		(void*)0			// Offset
+	);
+	glEnableVertexAttribArray(0/*Location*/);
+	glBindVertexArray(0);
+
+	unsigned int vertexShader;
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+	glCompileShader(vertexShader);
+	unsigned int fragmentShader;
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+	glCompileShader(fragmentShader);
+
+	int success;
+	char infoLog[512];
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
+		fprintf(stderr, infoLog);
+		return false;
+	}
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
+		fprintf(stderr, infoLog);
+		return false;
+	}
+
+	m_shaderProgram = glCreateProgram();
+	glAttachShader(m_shaderProgram, vertexShader);
+	glAttachShader(m_shaderProgram, fragmentShader);
+	glLinkProgram(m_shaderProgram);
+	glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		glGetProgramInfoLog(m_shaderProgram, 512, nullptr, infoLog);
+		fprintf(stderr, infoLog);
+		return false;
+	}
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
+	glUseProgram(m_shaderProgram);
+	glBindVertexArray(VAO);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	return true;
 }
 
@@ -66,12 +158,14 @@ void MinGL::processInput() const
 		glfwSetWindowShouldClose(m_window, true);
 }
 
-void MinGL::putPixel(int x, int y, float r, float g, float b) const
+void MinGL::putPixel(int x, int y, const MinGLColor& color) const
 {
+	GLint transformLoc = glGetUniformLocation(m_shaderProgram, "inColor");
+	glUniform4f(transformLoc, color.rgba[0], color.rgba[1], color.rgba[2], color.rgba[3]);
+
 	glEnable(GL_SCISSOR_TEST);
 	glScissor(x, y, 1, 1); /// position of pixel
-	glClearColor(r, g, b, 0.0f); /// color of pixel
-	glClear(GL_COLOR_BUFFER_BIT);
+	glDrawArrays(GL_TRIANGLES, 0/*Starting Index*/, 6/*# of vertices*/);
 	glDisable(GL_SCISSOR_TEST);
 }
 
