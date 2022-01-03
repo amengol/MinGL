@@ -16,6 +16,7 @@ public:
 	void processInput() const;
 	void putPixel(int x, int y, const MinGLColor& color) const;
 	void flush(float r, float g, float b, float a);
+	void flush(const MinGLColor& color);
 	void shutdown() const;
 	GLFWwindow* getWindow();
 
@@ -25,4 +26,3 @@ private:
 	int m_displayH;
 	unsigned m_shaderProgram;
 };
-
