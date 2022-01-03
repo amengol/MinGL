@@ -177,6 +177,11 @@ void MinGL::flush(float r, float g, float b, float a)
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void MinGL::flush(const MinGLColor& color)
+{
+	flush(color.rgba[0], color.rgba[1], color.rgba[2], color.rgba[3]);
+}
+
 void MinGL::shutdown() const
 {
 	glfwDestroyWindow(m_window);
