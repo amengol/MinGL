@@ -29,6 +29,8 @@ GLFW/glfw3.h
 GLFW/glfw3native.h
 ```
 
+Note: If you are trying to run the example, don't forget to link the glfw2 binaries: https://www.glfw.org/download. 
+
 ## License
 MinGL is licensed under [MIT License](LICENSE)
 - glad is licensed under [MIT License](https://github.com/Dav1dde/glad/blob/master/LICENSE)
