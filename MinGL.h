@@ -1,12 +1,10 @@
 #pragma once
 
-#include <cstdint>
-
 struct GLFWwindow;
 
 struct MinGLColor
 {
-	std::uint8_t rgba[4] = { 0,0,0,0 };
+	float rgba[4] = { 0,0,0,0 };
 };
 
 class MinGL
