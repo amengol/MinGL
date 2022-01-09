@@ -158,13 +158,13 @@ void MinGL::processInput() const
 		glfwSetWindowShouldClose(m_window, true);
 }
 
-void MinGL::putPixel(int x, int y, const MinGLColor& color) const
+void MinGL::putPixel(int x, int y, const MinGLColor& color, int width, int height) const
 {
 	GLint transformLoc = glGetUniformLocation(m_shaderProgram, "inColor");
 	glUniform4f(transformLoc, color.rgba[0], color.rgba[1], color.rgba[2], color.rgba[3]);
 
 	glEnable(GL_SCISSOR_TEST);
-	glScissor(x, y, 1, 1); /// position of pixel
+	glScissor(x, y, width, height); /// position of pixel
 	glDrawArrays(GL_TRIANGLES, 0/*Starting Index*/, 6/*# of vertices*/);
 	glDisable(GL_SCISSOR_TEST);
 }

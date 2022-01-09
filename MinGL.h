@@ -14,7 +14,7 @@ public:
 	bool windowShouldClose() const;
 	void pollEvents() const;
 	void processInput() const;
-	void putPixel(int x, int y, const MinGLColor& color) const;
+	void putPixel(int x, int y, const MinGLColor& color, int width=1, int height=1) const;
 	void flush(float r, float g, float b, float a);
 	void flush(const MinGLColor& color);
 	void shutdown() const;
