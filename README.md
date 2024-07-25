@@ -14,6 +14,16 @@ Note: Since ray-tracing is very demanding, you better of writing an image to dis
 The above image was drawn using MinGL within a `DrawLine()` function based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
 Bresenham’s Line Algorithm used in the [example](Example/Main.cpp) code was based on https://github.com/ssloy/tinyrenderer/wiki
 
+![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_ShapesExample.png?raw=true)
+
+The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()` functions
+
+`drawLine()` function is based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
+
+`drawRectangle()` function utilises `drawLine()` function mentioned above
+
+`drawCircle()` function is based on [Bresenham's Circle Drawing Algorithm](https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/)
+
 Usage
 =====
 
@@ -29,7 +39,14 @@ GLFW/glfw3.h
 GLFW/glfw3native.h
 ```
 
-Note: If you are trying to run the example, don't forget to link the glfw2 binaries: https://www.glfw.org/download. 
+Note:
+
+- If you are trying to run the example, don't forget to link the glfw2 binaries: https://www.glfw.org/download. 
+
+- On Linux you can add `-lGL` and `-lglfw` flags in command-line when compiling using **g++** to link the glfw binaries. Make sure to have the header files in your include path.
+
+- Use **C++ 17** or higher
+
 
 ## License
 MinGL is licensed under [MIT License](LICENSE)
