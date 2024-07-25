@@ -16,7 +16,7 @@ Bresenham’s Line Algorithm used in the [example](Example/Main.cpp) code was ba
 
 ![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_ShapesExample.png?raw=true)
 
-The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()` functions
+The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [shapesExample.cpp](Example/shapesExample.cpp)
 
 `drawLine()` function is based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
 
