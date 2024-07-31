@@ -2,7 +2,7 @@
 #include <glad/glad.h> // OpenGL functions
 #include <GLFW/glfw3.h> // windows, contexts, input and events
 #include <iostream>
-#include <queue>
+#include <vector>
 
 const char* vertexShaderSource =
 "#version 330 core\n"
@@ -170,10 +170,10 @@ void MinGL::putPixel(int x, int y, const MinGLColor& color, int width, int heigh
 	glDisable(GL_SCISSOR_TEST);
 }
 
-const MinGLColor MinGL::getPixelColor(int x, int y, int width, int height) const{
-	int pixelSize = 4; // RGBA has 4 components (R, G, B, A)
-    unsigned char* pixel = new unsigned char[pixelSize];
-    glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+const MinGLColor MinGL::getPixelColor(int x, int y) const{
+	constexpr int pixelSize = 4; // RGBA has 4 components (R, G, B, A)
+    std::vector<unsigned char> pixel(pixelSize);
+    glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel.data());
 	const MinGLColor color{(float)pixel[0]/255, (float)pixel[1]/255, (float)pixel[2]/255, 1.0f};
 	return color;
 }

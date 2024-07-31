@@ -15,10 +15,7 @@ struct MinGLColor
 		return true;
 	}
 	bool operator != (const MinGLColor color2) const{
-		for(int i=0; i<4; i++){
-			if( fabs(this->rgba[i] - color2.rgba[i]) > epsilon ) return true;
-		}
-		return false;
+		return !(*this==color2);
 	}
 };
 
@@ -30,7 +27,7 @@ public:
 	void pollEvents() const;
 	void processInput() const;
 	void putPixel(int x, int y, const MinGLColor& color, int width=1, int height=1) const;
-	const MinGLColor getPixelColor(int x, int y, int width=1, int height=1) const;
+	const MinGLColor getPixelColor(int x, int y) const;
 	void drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color);
 	void drawRectangle(int x0, int y0, int x1, int y1, const MinGLColor& color);
 	void drawCircle(int x, int y, int rad, const MinGLColor& color);
