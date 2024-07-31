@@ -45,7 +45,7 @@ Note:
 
 - On Linux you can add `-lGL` and `-lglfw` flags in command-line when compiling using **g++** to link the glfw binaries. Make sure to have the header files in your include path.
 
-- Use **C++ 17** or higher
+- Use **C++ 14** or higher
 
 
 ## License
