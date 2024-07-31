@@ -170,7 +170,7 @@ void MinGL::putPixel(int x, int y, const MinGLColor& color, int width, int heigh
 	glDisable(GL_SCISSOR_TEST);
 }
 
-const MinGLColor MinGL::getPixelColor(int x, int y) const{
+MinGLColor MinGL::getPixelColor(int x, int y) const{
 	constexpr int pixelSize = 4; // RGBA has 4 components (R, G, B, A)
     std::vector<unsigned char> pixel(pixelSize);
     glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel.data());
@@ -178,7 +178,7 @@ const MinGLColor MinGL::getPixelColor(int x, int y) const{
 	return color;
 }
 
-void MinGL::drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color){
+void MinGL::drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color) const{
 	// Bresenham's line generation algorithm is used here
 
 	bool steep = false;
@@ -191,8 +191,10 @@ void MinGL::drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color){
 		std::swap(x0, x1);
 		std::swap(y0, y1);
 	}
-	int dx = x1 - x0;
-	int dy = y1 - y0;
+
+	const int dx = x1 - x0;
+	const int dy = y1 - y0;
+
 	int derror = std::abs(dy) * 2;
 	int error = 0;
 	int y = y0;
@@ -210,15 +212,15 @@ void MinGL::drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color){
 		}
 	}
 }
-
-void MinGL::drawRectangle(int x0, int y0, int x1, int y1, const MinGLColor& color){
+void MinGL::drawRectangle(int x0, int y0, int x1, int y1, const MinGLColor& color) const{
 	// specify any two diagonally opposite points of the rectangle
+	// draws a rectangle with sides parallel to screen
 
-	int xa = std::min(x0, x1);
-	int ya = std::min(y0, y1);
+	const int xa = std::min(x0, x1);
+	const int ya = std::min(y0, y1);
 
-	int xb = std::max(x0, x1);
-	int yb = std::max(y0, y1);
+	const int xb = std::max(x0, x1);
+	const int yb = std::max(y0, y1);
 
 	for(int i=xa; i<xb; i++){
 		putPixel(i, ya, color);
@@ -235,11 +237,11 @@ void MinGL::drawRectangle(int x0, int y0, int x1, int y1, const MinGLColor& colo
 }
 
 
-void MinGL::drawCircle(int xc, int yc, int rad, const MinGLColor& color){
+void MinGL::drawCircle(int xc, int yc, int rad, const MinGLColor& color) const{
 	// specify center (x,y) of circle and its radius
 	// Bresenham's circle drawing algorithm is used here
 
-	auto draw = [&](int x, int y){
+	auto draw = [this, xc, yc, &color](int x, int y){
 		putPixel(xc+x, yc+y, color);
 		putPixel(xc-x, yc+y, color);
 		putPixel(xc+x, yc-y, color);
