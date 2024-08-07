@@ -11,12 +11,12 @@ Note: Since ray-tracing is very demanding, you better of writing an image to dis
 
 ![screenshot of a cube rendered with the sample program](/Example/MinGL_Example.PNG?raw=true)
 
-The above image was drawn using MinGL within a `DrawLine()` function based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
-Bresenham’s Line Algorithm used in the [example](Example/Main.cpp) code was based on https://github.com/ssloy/tinyrenderer/wiki
+The above image was drawn using MinGL `drawLine()` function based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
+Bresenham’s Line Algorithm used in the [example](Example/Main.cpp)'s drawCube() function is based on https://github.com/ssloy/tinyrenderer/wiki
 
 ![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_ShapesExample.png?raw=true)
 
-The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [shapesExample.cpp](Example/shapesExample.cpp)
+The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [Example.cpp](src/Example.cpp) drawShapes() function
 
 `drawLine()` function is based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
 
@@ -28,22 +28,35 @@ Usage
 =====
 
 MinGL depends on [glad](https://glad.dav1d.de/) and [GLFW](https://www.glfw.org/) to work. Following is an example of how files could be organized:
+
 ```
-Main.cpp
-MinGL.h
-MinGL.cpp
-glad/khrplatform.h
-glad/glad.h
-glad/glad.c
-GLFW/glfw3.h
-GLFW/glfw3native.h
+ProjectFolder
+|
+├── glad
+│   ├── glad.c
+│   ├── glad.h
+│   └── khrplatform.h
+├── GLFW
+│   ├── glfw3.h
+│   └── glfw3native.h
+├── include
+│   ├── Example.h
+│   └── MinGL.h
+├── src
+│   ├── Example.cpp
+│   └── MinGL.cpp
+└── Main.cpp
 ```
 
 Note:
 
 - If you are trying to run the example, don't forget to link the glfw2 binaries: https://www.glfw.org/download. 
 
-- On Linux you can add `-lGL` and `-lglfw` flags in command-line when compiling using **g++** to link the glfw binaries. Make sure to have the header files in your include path.
+- Make sure to include the necessary files and link the libraries. If you are using `g++` for compiling you can use the following command to compile `Main.cpp`. To compile your own file replace Main.cpp with your file name.
+
+```sh
+g++ -std=c++14 -Iglad -IGLFW -Iinclude Main.cpp glad/glad.c src/MinGL.cpp src/Example.cpp -lglfw -o Main
+```
 
 - Use **C++ 14** or higher
 
