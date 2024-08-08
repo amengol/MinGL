@@ -16,7 +16,7 @@ Bresenham’s Line Algorithm used in the [example](Example/Main.cpp)'s drawCube(
 
 ![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_ShapesExample.png?raw=true)
 
-The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [Example.cpp](src/Example.cpp) drawShapes() function
+The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [Example.cpp](Example/Example.cpp) drawShapes() function
 
 `drawLine()` function is based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) 
 
@@ -30,8 +30,10 @@ Usage
 MinGL depends on [glad](https://glad.dav1d.de/) and [GLFW](https://www.glfw.org/) to work. Following is an example of how files could be organized:
 
 ```
-ProjectFolder
-|
+.
+├── Example
+│   ├── Example.cpp
+│   ├── Example.h
 ├── glad
 │   ├── glad.c
 │   ├── glad.h
@@ -39,12 +41,8 @@ ProjectFolder
 ├── GLFW
 │   ├── glfw3.h
 │   └── glfw3native.h
-├── include
-│   ├── Example.h
-│   └── MinGL.h
-├── src
-│   ├── Example.cpp
-│   └── MinGL.cpp
+├── MinGL.h
+├── MinGL.cpp
 └── Main.cpp
 ```
 
@@ -52,11 +50,18 @@ Note:
 
 - If you are trying to run the example, don't forget to link the glfw2 binaries: https://www.glfw.org/download. 
 
-- Make sure to include the necessary files and link the libraries. If you are using `g++` for compiling you can use the following command to compile `Main.cpp`. To compile your own file replace Main.cpp with your file name.
+- Make sure to include the necessary files and link the libraries. 
 
-```sh
-g++ -std=c++14 -Iglad -IGLFW -Iinclude Main.cpp glad/glad.c src/MinGL.cpp src/Example.cpp -lglfw -o Main
-```
+    If you are using `g++` for compiling you can use the following command to compile `Main.cpp`.
+
+    ```sh
+    g++ -std=c++14 -I./ -IExample Main.cpp glad/glad.c MinGL.cpp Example/Example.cpp -lglfw -o Main
+    ```
+
+    If you want to compile your own file and not include the example code, use the following
+    ```sh
+    g++ -std=c++14 -I./ <filename>.cpp glad/glad.c MinGL.cpp -lglfw -o <output filename>
+    ```
 
 - Use **C++ 14** or higher
 
