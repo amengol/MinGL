@@ -34,6 +34,7 @@ MinGL depends on [glad](https://glad.dav1d.de/) and [GLFW](https://www.glfw.org/
 ├── Example
 │   ├── Example.cpp
 │   ├── Example.h
+|   ├── Main.cpp
 ├── glad
 │   ├── glad.c
 │   ├── glad.h
@@ -42,8 +43,7 @@ MinGL depends on [glad](https://glad.dav1d.de/) and [GLFW](https://www.glfw.org/
 │   ├── glfw3.h
 │   └── glfw3native.h
 ├── MinGL.h
-├── MinGL.cpp
-└── Main.cpp
+└── MinGL.cpp
 ```
 
 Note:
@@ -55,7 +55,7 @@ Note:
     If you are using `g++` for compiling you can use the following command to compile `Main.cpp`.
 
     ```sh
-    g++ -std=c++14 -I./ -IExample Main.cpp glad/glad.c MinGL.cpp Example/Example.cpp -lglfw -o Main
+    g++ -std=c++14 -I./ -IExample Example/Main.cpp glad/glad.c MinGL.cpp Example/Example.cpp -lglfw -o Main
     ```
 
     If you want to compile your own file and not include the example code, use the following
