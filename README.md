@@ -34,7 +34,7 @@ MinGL depends on [glad](https://glad.dav1d.de/) and [GLFW](https://www.glfw.org/
 ├── Example
 │   ├── Example.cpp
 │   ├── Example.h
-|   ├── Main.cpp
+|   └── Main.cpp
 ├── glad
 │   ├── glad.c
 │   ├── glad.h
