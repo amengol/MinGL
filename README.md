@@ -9,12 +9,12 @@ Note: Since ray-tracing is very demanding, you better of writing an image to dis
 
 ## Screenshot
 
-![screenshot of a cube rendered with the sample program](/Example/MinGL_Example.PNG?raw=true)
+![screenshot of a cube rendered with the sample program](/Example/MinGL_drawCube_Example.PNG?raw=true)
 
 The above image was drawn using MinGL `drawLine()` function based on [Bresenham’s Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
 Bresenham’s Line Algorithm used in the [example](Example/Main.cpp)'s drawCube() function is based on https://github.com/ssloy/tinyrenderer/wiki
 
-![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_ShapesExample.png?raw=true)
+![screenshot of a target rendered with the ShapeSample program](/Example/MinGL_drawShapes_Example.png?raw=true)
 
 The above image was drawn using MinGL functions `drawLine()`, `drawRectangle()`, and `drawCircle()`, the code can be found in [Example.cpp](Example/Example.cpp) drawShapes() function
 
