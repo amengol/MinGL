@@ -1,10 +1,22 @@
 #pragma once
+#include<math.h>
 
 struct GLFWwindow;
 
 struct MinGLColor
 {
 	float rgba[4] = { 0,0,0,0 };
+
+	static constexpr float epsilon = 0.0039215;
+	bool operator == (const MinGLColor color2) const{
+		for(int i=0; i<4; i++){
+			if( fabs(this->rgba[i] - color2.rgba[i]) > epsilon )return false;
+		}
+		return true;
+	}
+	bool operator != (const MinGLColor color2) const{
+		return !(*this==color2);
+	}
 };
 
 class MinGL
@@ -15,6 +27,10 @@ public:
 	void pollEvents() const;
 	void processInput() const;
 	void putPixel(int x, int y, const MinGLColor& color, int width=1, int height=1) const;
+	MinGLColor getPixelColor(int x, int y) const;
+	void drawLine(int x0, int y0, int x1, int y1, const MinGLColor& color) const;
+	void drawRectangle(int x0, int y0, int x1, int y1, const MinGLColor& color) const;
+	void drawCircle(int x, int y, int rad, const MinGLColor& color) const;
 	void flush(float r, float g, float b, float a);
 	void flush(const MinGLColor& color);
 	void shutdown() const;
