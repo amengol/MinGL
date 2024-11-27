@@ -110,14 +110,14 @@ bool MinGL::init(unsigned width, unsigned height, const char* title)
 	if (!success)
 	{
 		glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
-		fprintf(stderr, infoLog);
+		fprintf(stderr, "%s", infoLog);
 		return false;
 	}
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
 		glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
-		fprintf(stderr, infoLog);
+		fprintf(stderr, "%s", infoLog);
 		return false;
 	}
 
@@ -129,7 +129,7 @@ bool MinGL::init(unsigned width, unsigned height, const char* title)
 	if (!success)
 	{
 		glGetProgramInfoLog(m_shaderProgram, 512, nullptr, infoLog);
-		fprintf(stderr, infoLog);
+		fprintf(stderr, "%s", infoLog);
 		return false;
 	}
 	glDeleteShader(vertexShader);
