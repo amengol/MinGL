@@ -1,6 +1,7 @@
 #include "MinGL.h"
 #include <glad/glad.h> // OpenGL functions
 #include <GLFW/glfw3.h> // windows, contexts, input and events
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
