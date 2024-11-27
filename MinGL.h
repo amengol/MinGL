@@ -7,7 +7,7 @@ struct MinGLColor
 {
 	float rgba[4] = { 0,0,0,0 };
 
-	static constexpr float epsilon = 0.0039215;
+	static constexpr float epsilon = 0.0039215f;
 	bool operator == (const MinGLColor color2) const{
 		for(int i=0; i<4; i++){
 			if( fabs(this->rgba[i] - color2.rgba[i]) > epsilon )return false;
